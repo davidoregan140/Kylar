@@ -1,0 +1,1 @@
+INSERT INTO players VALUES (1, 'David', 'ORegan', 'Sharkbag', '1000', 'dagger', 'crossbow', 'chainmail', 'shield'); 
