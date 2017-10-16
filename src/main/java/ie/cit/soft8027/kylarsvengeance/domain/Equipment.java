@@ -1,8 +1,10 @@
-package ie.cit.soft8027.kylarsvenageance.domain;
+package ie.cit.soft8027.kylarsvengeance.domain;
 
 public class Equipment {
 
 	private int id;
+	
+	private String type;
 	
 	private String name;
 	
@@ -14,9 +16,10 @@ public class Equipment {
 	
 	
 
-	public Equipment(int id, String name, int damageInflicted, int protectionProvided, int upgradeLevel) {
+	public Equipment(int id, String type, String name, int damageInflicted, int protectionProvided, int upgradeLevel) {
 		super();
 		this.id = id;
+		this.type = type;
 		this.name = name;
 		this.damageInflicted = damageInflicted;
 		this.protectionProvided = protectionProvided;
@@ -33,6 +36,15 @@ public class Equipment {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getName() {
@@ -69,7 +81,7 @@ public class Equipment {
 
 	@Override
 	public String toString() {
-		return "Equipment [id=" + id + ", name=" + name + ", damageInflicted=" + damageInflicted
+		return "Equipment [id=" + id + ", type=" + type + ", name=" + name + ", damageInflicted=" + damageInflicted
 				+ ", protectionProvided=" + protectionProvided + ", upgradeLevel=" + upgradeLevel + "]";
 	}
 	
