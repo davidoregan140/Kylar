@@ -38,15 +38,18 @@ public class JdbcPlayerRepository implements PlayerRepository {
 	}
 
 	private void add(Player player) {
-		String sql = "INSERT INTO artists (fullName, gender) VALUES (?,?)";
+		String sql = "INSERT INTO players (fullName, gender) VALUES (?,?)";
 		jdbcTemplate.update(sql, new Object[] { player.getUserName(), player.getGender()} );
 	}
 	
 	private void update(Player player) {
-		String sql = "UPDATE artists SET fullName = ?, gender = ? WHERE id = ?";
-		jdbcTemplate.update(sql, new Object[] { player.getUserName(),
-			player.getGender(), player.getId()} );
+		String sql = "UPDATE players SET firstName = ?, lastName = ?, gender = ?, "
+				+ "userName = ?, balance = ? WHERE id = ?";
+		jdbcTemplate.update(sql, new Object[] { player.getFirstName(), player.getLastName(), player.getGender(), 
+				player.getUserName(), player.getBalance(),
+			player.getId()} );
 	}
+	
 	
 	@Override
 	public void remove(Player player) {

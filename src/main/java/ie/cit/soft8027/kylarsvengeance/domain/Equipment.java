@@ -14,9 +14,10 @@ public class Equipment {
 	
 	private int upgradeLevel;
 	
+	private int price;
 	
 
-	public Equipment(int id, String type, String name, int damageInflicted, int protectionProvided, int upgradeLevel) {
+	public Equipment(int id, String type, String name, int damageInflicted, int protectionProvided, int upgradeLevel, int price) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -24,6 +25,7 @@ public class Equipment {
 		this.damageInflicted = damageInflicted;
 		this.protectionProvided = protectionProvided;
 		this.upgradeLevel = upgradeLevel;
+		this.price = price;
 	}
 
 	public Equipment() {
@@ -78,11 +80,20 @@ public class Equipment {
 	public void setUpgradeLevel(int upgradeLevel) {
 		this.upgradeLevel = upgradeLevel;
 	}
+	
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
 	@Override
 	public String toString() {
 		return "Equipment [id=" + id + ", type=" + type + ", name=" + name + ", damageInflicted=" + damageInflicted
-				+ ", protectionProvided=" + protectionProvided + ", upgradeLevel=" + upgradeLevel + "]";
+				+ ", protectionProvided=" + protectionProvided + ", upgradeLevel=" + upgradeLevel + ", price =" + price + "]";
 	}
 	
 	

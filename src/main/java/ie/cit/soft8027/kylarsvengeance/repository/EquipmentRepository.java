@@ -8,6 +8,8 @@ public interface EquipmentRepository {
 
 	public Equipment get(int id);
 	
+	public void add(int playerId, int equipmentId);
+	
 	public void save(Equipment equipment);
 	
 	public void remove(Equipment equipment);

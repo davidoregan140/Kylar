@@ -18,7 +18,7 @@ public class PlayerRowMapper implements RowMapper<Player>{
 		player.setLastName(rs.getString("lastName"));
 		player.setGender(rs.getString("gender"));
 		player.setUserName(rs.getString("userName"));
-		player.setBalance(rs.getDouble("balance"));
+		player.setBalance(rs.getInt("balance"));
 				
 		return player;
 	}

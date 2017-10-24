@@ -15,7 +15,7 @@ public class Player {
 	
 	private String userName;
 	
-	private double balance;
+	private int balance;
 
 	private List<Equipment> equipmentList;
 
@@ -26,7 +26,7 @@ public class Player {
 	
 	
 	
-	public Player(int id, String firstName, String lastName, String gender, String userName, double balance,
+	public Player(int id, String firstName, String lastName, String gender, String userName, int balance,
 			List<Equipment> equipmentList) {
 		super();
 		this.id = id;
@@ -91,7 +91,6 @@ public class Player {
 	}
 
 	
-	
 	public String getGender() {
 		return gender;
 	}
@@ -101,12 +100,11 @@ public class Player {
 		this.gender = gender;
 	}
 
-	public double getBalance() {
+	public int getBalance() {
 		return balance;
 	}
 
-
-	public void setBalance(double balance) {
+	public void setBalance(int balance) {
 		this.balance = balance;
 	}
 
@@ -118,13 +116,13 @@ public class Player {
 
 	@Override
 	public String toString() {
-		String out = "Player [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
-				+ ", userName=" + userName + ", balance=" + balance + ", equipmentList=[";
+		String out = "Id = " + id + "\nFirst Name = " + firstName + "\nLast Name = " + lastName + "\nGender = " + gender
+				+ "\nUsername = " + userName + "\nBalance = " + balance + " Kubits" + "\nCurrent Equipment = [";
 		
 			for (Equipment e : equipmentList) {
-				out += e.toString() + ",";
+				out += e.toString() + "\n";
 			}
-			out += "]]";
+			//out += "]]";
 		return out;
 		
 	}

@@ -18,6 +18,7 @@ public class EquipmentRowMapper implements RowMapper<Equipment> {
 		equipment.setDamageInflicted(rs.getInt("damageInflicted"));
 		equipment.setProtectionProvided(rs.getInt("protectionProvided"));
 		equipment.setUpgradeLevel(rs.getInt("upgradeLevel"));
+		equipment.setPrice(rs.getInt("price"));
 		
 		return equipment;
 	}
