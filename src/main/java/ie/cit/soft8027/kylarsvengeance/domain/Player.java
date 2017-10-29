@@ -3,6 +3,8 @@ package ie.cit.soft8027.kylarsvengeance.domain;
 import java.util.Collections;
 import java.util.List;
 
+import ie.cit.soft8027.kylarsvengeance.repository.EquipmentRepository;
+
 public class Player {
 	
 	private int id;
@@ -18,10 +20,12 @@ public class Player {
 	private int balance;
 
 	private List<Equipment> equipmentList;
+	
+	EquipmentRepository equipmentRepository;
 
 	//constructor
 	public Player() {
-		equipmentList = Collections.<Equipment>emptyList();
+		//equipmentList = equipmentRepository.findAll();
 	}
 	
 	
@@ -116,13 +120,22 @@ public class Player {
 
 	@Override
 	public String toString() {
-		String out = "Id = " + id + "\nFirst Name = " + firstName + "\nLast Name = " + lastName + "\nGender = " + gender
-				+ "\nUsername = " + userName + "\nBalance = " + balance + " Kubits" + "\nCurrent Equipment = [";
+		String out = "Player ID: " + id + "\nFirst Name: " + firstName + "\nLast Name: " + lastName + "\nGender: " + gender
+				+ "\nUsername: " + userName + "\nBalance: " + balance + " Kubits" + "\nCurrent Equipment: \n";
+		
+		//List<Equipment> equipment = equipmentRepository.findAll();
+		
+//		for (Equipment e : equipment) {
+//			System.out.println(e.toString());
+//			out += e.toString() + "\n";
+//		}
+		
+		//equipmentList = equipmentRepository.findAll();
 		
 			for (Equipment e : equipmentList) {
 				out += e.toString() + "\n";
 			}
-			//out += "]]";
+			
 		return out;
 		
 	}

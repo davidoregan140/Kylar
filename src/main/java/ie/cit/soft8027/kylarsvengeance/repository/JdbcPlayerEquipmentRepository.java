@@ -54,7 +54,6 @@ public class JdbcPlayerEquipmentRepository implements PlayerEquipmentRepository{
 
 	@Override
 	public PlayerEquipmentRepository get(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

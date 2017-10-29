@@ -3,6 +3,7 @@ package ie.cit.soft8027.kylarsvengeance.repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,7 @@ import ie.cit.soft8027.kylarsvengeance.domain.Player;
 import ie.cit.soft8027.kylarsvengeance.rowmapper.PlayerRowMapper;
 
 @Repository
+@SpringBootApplication
 public class JdbcPlayerRepository implements PlayerRepository {
 
 	private JdbcTemplate jdbcTemplate;
@@ -18,6 +20,7 @@ public class JdbcPlayerRepository implements PlayerRepository {
 	public JdbcPlayerRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
+	
 	
 	@Override
 	public Player get(int id) {

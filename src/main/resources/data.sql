@@ -1,6 +1,7 @@
-INSERT INTO players VALUES (1, 'David', 'ORegan', 'Male', 'Sharkbag', 1000); 
+INSERT INTO players VALUES (1, 'David', 'O''Regan', 'Male', 'Sharkbag', 1000); 
 
-INSERT INTO equipment VALUES (1, 'up-close weapon', 'Sword', 55, 20, 1, 300), 
+INSERT INTO equipment (id, type, name, damageInflicted, protectionProvided, upgradeLevel, price) 
+					 VALUES (1, 'up-close weapon', 'Sword', 55, 20, 1, 300), 
 							(2, 'distance weapon', 'Crossbow', 70, 5, 1, 400),
 							(3, 'up-close weapon', 'Dagger', 50, 2, 1, 200),
 							(4, 'distance weapon', 'Spear', 68, 0, 1, 250),

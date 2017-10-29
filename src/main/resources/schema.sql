@@ -1,5 +1,5 @@
 CREATE TABLE players (
-	id int (10) NOT NULL AUTO_INCREMENT,
+	id int (3) NOT NULL AUTO_INCREMENT,
 	firstName varchar (20),
 	lastName varchar (20),	
 	gender varchar (6),
@@ -9,7 +9,7 @@ CREATE TABLE players (
 );
 
 CREATE TABLE equipment (
-	id int (10) NOT NULL AUTO_INCREMENT,
+	id int (3) NOT NULL AUTO_INCREMENT,
 	type varchar (20) NOT NULL,
 	name varchar (20) NOT NULL,
 	damageInflicted int (3),

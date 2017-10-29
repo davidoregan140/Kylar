@@ -45,18 +45,18 @@ public class JdbcEquipmentRepository implements EquipmentRepository {
 	
 	public void add(Equipment equipment) {
 		Player player = new Player();
-		//Equipment equipment = new Equipment();
 		String sql = "INSERT INTO players_equipment (player_id, equipment_id) VALUES (?, ?)";
 		jdbcTemplate.update(sql, new Object[] { player.getId(), equipment.getId()} );
 		
 	}
 	
+	
+	
 	private void update(Equipment equipment) {
-		String sql = "UPDATE equipment SET id = ?, type = ?, name = ?, damageInflicted = ?, "
-				+ "protectionProvided = ?, upgradeLevel = ?, price = ? WHERE id = ?";
-		jdbcTemplate.update(sql, new Object[] { equipment.getId(), equipment.getType(), equipment.getName(), 
-				equipment.getDamageInflicted(), equipment.getProtectionProvided(), 
-				equipment.getUpgradeLevel(), equipment.getPrice() });
+		String sql = "UPDATE equipment SET damageInflicted = ?, "
+				+ "protectionProvided = ?, upgradeLevel = ?, WHERE id = ?";
+		jdbcTemplate.update(sql, new Object[] {	equipment.getDamageInflicted(), equipment.getProtectionProvided(), 
+				equipment.getUpgradeLevel(), equipment.getId() });
 	}
 	
 
@@ -68,16 +68,12 @@ public class JdbcEquipmentRepository implements EquipmentRepository {
 
 	@Override
 	public List<Equipment> findAll() {
-		String sql = "SELECT * FORM equipment";
+		String sql = "SELECT * FROM equipment";
 		return jdbcTemplate.query(sql, new EquipmentRowMapper());
 	}
 
 
-	@Override
-	public void add(int playerId, int equipmentId) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	
 	

@@ -92,8 +92,8 @@ public class Equipment {
 
 	@Override
 	public String toString() {
-		return "Equipment [id=" + id + ", type=" + type + ", name=" + name + ", damageInflicted=" + damageInflicted
-				+ ", protectionProvided=" + protectionProvided + ", upgradeLevel=" + upgradeLevel + ", price =" + price + "]";
+		return "\nID: " + id + "\n Type: " + type + "\n Name: " + name + "\n Damage Inflicted: " + damageInflicted
+				+ "\n Protection Provided: " + protectionProvided + "\n Level: " + upgradeLevel + "\n Price: " + price + " Kubits";
 	}
 	
 	
