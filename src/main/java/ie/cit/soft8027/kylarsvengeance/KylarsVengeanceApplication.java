@@ -152,7 +152,7 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 
 			switch (choice)
 			{
-			case '1' : //for buying new equipment
+			case '1' : 
 
 				buyEquipment();
 	
@@ -160,7 +160,7 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 			
 				break;
 
-			case '2' : //for selling equipment
+			case '2' :
 
 				sellEquipment();
 				returnPlayerInfo();
@@ -222,9 +222,6 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 
 		int eqChoice = reader.nextInt();
 		
-//		for (Integer i : idList) {
-//			System.out.println("Already have: " + i);
-//		}
 
 		//if the equipment chosen is already in the player's equipment list:
 		if (idList.contains(eqChoice)) {
@@ -245,11 +242,7 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 			playerEquipment.setPlayerId(1);
 			playerEquipment.setEquipmentId(eqChoice);
 
-			jdbcPlayerEquipmentRepository.add(playerEquipment); // this works - put in 4 and you get a Spear
-
-			/*this only works for setting balance of the player object, not of the table player
-		At the moment I have to hard code the price of the piece of equipment so it takes it away from the total
-		balance*/
+			jdbcPlayerEquipmentRepository.add(playerEquipment);
 
 			Equipment equipmentBuy = jdbcEquipmentRepository.get(eqChoice);
 

@@ -25,7 +25,7 @@ public class Player {
 
 	//constructor
 	public Player() {
-		//equipmentList = equipmentRepository.findAll();
+		
 	}
 	
 	
