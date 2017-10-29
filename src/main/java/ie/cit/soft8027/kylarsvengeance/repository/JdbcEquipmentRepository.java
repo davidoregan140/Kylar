@@ -15,6 +15,8 @@ public class JdbcEquipmentRepository implements EquipmentRepository {
 
 	private JdbcTemplate jdbcTemplate;
 	
+	
+	
 	@Autowired
 	public JdbcEquipmentRepository(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -28,7 +30,7 @@ public class JdbcEquipmentRepository implements EquipmentRepository {
 	@Override
 	public Equipment get(int id) {
 		String sql = "SELECT * FROM equipment WHERE id = ?";
-		Equipment equipment = jdbcTemplate.queryForObject(sql, new Object[] { 1 }, 
+		Equipment equipment = jdbcTemplate.queryForObject(sql, new Object[] { id }, 
 				new EquipmentRowMapper());
 		return equipment;
 	}
@@ -52,9 +54,9 @@ public class JdbcEquipmentRepository implements EquipmentRepository {
 	
 	
 	
-	private void update(Equipment equipment) {
+	public void update(Equipment equipment) {
 		String sql = "UPDATE equipment SET damageInflicted = ?, "
-				+ "protectionProvided = ?, upgradeLevel = ?, WHERE id = ?";
+				+ "protectionProvided = ?, upgradeLevel = ? WHERE id = ?";
 		jdbcTemplate.update(sql, new Object[] {	equipment.getDamageInflicted(), equipment.getProtectionProvided(), 
 				equipment.getUpgradeLevel(), equipment.getId() });
 	}
@@ -62,10 +64,11 @@ public class JdbcEquipmentRepository implements EquipmentRepository {
 
 	@Override
 	public void remove(Equipment equipment) {
-		// TODO Auto-generated method stub
-		
+		String sql = "DELETE FROM equipment WHERE id = ?";
+		jdbcTemplate.update(sql, new Object[] { equipment.getId() } );		
 	}
 
+	
 	@Override
 	public List<Equipment> findAll() {
 		String sql = "SELECT * FROM equipment";

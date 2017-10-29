@@ -9,11 +9,13 @@ public interface PlayerEquipmentRepository {
 
 	public PlayerEquipmentRepository get(int id);
 	
+	public List<PlayerEquipment> getEquipmentId();
+	
 	public void add(PlayerEquipment playerEquipment);
 	
 	public void save(PlayerEquipment playerEquipment);
 	
 	public void remove(PlayerEquipment playerEquipment);
 	
-	public List<Equipment> findAll();
+	public List<PlayerEquipment> findAll();
 }

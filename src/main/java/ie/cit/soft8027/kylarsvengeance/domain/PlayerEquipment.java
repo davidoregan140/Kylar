@@ -35,6 +35,13 @@ public class PlayerEquipment {
 	public void setEquipmentId(int equipmentId) {
 		this.equipmentId = equipmentId;
 	}
+
+
+
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return playerId;
+	}
 	
 	
 }

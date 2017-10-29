@@ -41,7 +41,6 @@ public class KylarsVengeanceApplicationTests {
 	@Autowired
 	JdbcPlayerEquipmentRepository pEqRepo;
 	
-
 	
 	@Test
 	public void contextLoads() {
@@ -76,12 +75,5 @@ public class KylarsVengeanceApplicationTests {
 		Equipment q = eqRepo.get(5);
 		assertEquals("Basic Wooden Shield", q.getName());
 	}
-	
-
-	
-	
-	
-	
-	
-	
+		
 }

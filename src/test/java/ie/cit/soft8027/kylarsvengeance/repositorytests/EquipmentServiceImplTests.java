@@ -13,18 +13,20 @@ import org.junit.Test;
 
 import ie.cit.soft8027.kylarsvengeance.domain.Equipment;
 import ie.cit.soft8027.kylarsvengeance.repository.EquipmentRepository;
+import ie.cit.soft8027.kylarsvengeance.repository.JdbcEquipmentRepository;
 import ie.cit.soft8027.kylarsvengeance.service.EquipmentService;
 import ie.cit.soft8027.kylarsvengeance.service.EquipmentServiceImpl;
 
+
 public class EquipmentServiceImplTests {
 
-	private EquipmentService equipmentService;
-	private EquipmentRepository repoMock;
+	private EquipmentServiceImpl equipmentService;
+	private JdbcEquipmentRepository repoMock;
 
 	@Before
 	public void setup() {
 
-		repoMock = mock(EquipmentRepository.class);
+		repoMock = mock(JdbcEquipmentRepository.class);
 
 		Equipment e = new Equipment();
 		e.setId(1);
@@ -59,7 +61,6 @@ public class EquipmentServiceImplTests {
 	}
 
 
-	//All tests are successful
 	@Test
 	public void get() {
 		Equipment e = equipmentService.get(1);
@@ -72,12 +73,27 @@ public class EquipmentServiceImplTests {
 		assertEquals("Iron Shield", e.getName());
 	}
 
-
+	@Test
+	public void checkDamage() {
+		Equipment e  = equipmentService.get(1);
+		assertEquals(65, e.getDamageInflicted());
+	}
+	
+	
 	@Test
 	public void findAll() {
 		assertTrue(equipmentService.findAll().size() == 2);
 	}
 
+	// Unsure of why this fails
+	@Test
+	public void remove() {
+		Equipment e = repoMock.get(1);
+		repoMock.remove(e);
+		List<Equipment> equipmentList = repoMock.findAll();
+		assertEquals(1, equipmentList.size());
+		
+	}
 
 
 

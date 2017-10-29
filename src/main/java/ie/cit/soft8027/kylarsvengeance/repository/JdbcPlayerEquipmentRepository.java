@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import ie.cit.soft8027.kylarsvengeance.domain.Equipment;
 import ie.cit.soft8027.kylarsvengeance.domain.Player;
 import ie.cit.soft8027.kylarsvengeance.domain.PlayerEquipment;
+import ie.cit.soft8027.kylarsvengeance.rowmapper.PlayerEquipmentRowMapper;
 
 @Repository
 public class JdbcPlayerEquipmentRepository implements PlayerEquipmentRepository{
@@ -39,9 +40,9 @@ public class JdbcPlayerEquipmentRepository implements PlayerEquipmentRepository{
 	
 
 	@Override
-	public List<Equipment> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PlayerEquipment> findAll() {
+		String sql = "SELECT * FROM players_equipment";
+		return jdbcTemplate.query(sql, new PlayerEquipmentRowMapper());
 	}
 
 	@Override
@@ -64,6 +65,13 @@ public class JdbcPlayerEquipmentRepository implements PlayerEquipmentRepository{
 		String sql = "DELETE FROM players_equipment WHERE equipment_id = ?";
 		jdbcTemplate.update(sql, new Object[] { playerEquipment.getEquipmentId() });
 		
+	}
+
+
+	@Override
+	public List<PlayerEquipment> getEquipmentId() {
+		String sql = "SELECT equipment_id FROM players_equipment";
+		return jdbcTemplate.query(sql, new PlayerEquipmentRowMapper());
 	}
 
 	

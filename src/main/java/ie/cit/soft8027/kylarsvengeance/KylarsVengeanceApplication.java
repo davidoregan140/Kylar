@@ -126,13 +126,13 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 
 		System.out.println(player);
 
+
 	}
 
 
 
 
 	public void displayMenu() {
-
 
 		char choice;
 		do 
@@ -155,8 +155,9 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 			case '1' : //for buying new equipment
 
 				buyEquipment();
+	
 				returnPlayerInfo();
-
+			
 				break;
 
 			case '2' : //for selling equipment
@@ -202,29 +203,37 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 		System.out.println("Enter id number of the piece of equipment you wish to buy:\n");
 		System.out.println("Items available to buy: ");
 
-		
-		
-		List<Equipment> equipment = equipmentRepository.findAll();
+		//to populate the ID list
+		List<PlayerEquipment> playerEquipmentList = jdbcPlayerEquipmentRepository.findAll();
 
 		ArrayList<Integer> idList = new ArrayList<Integer>();
 		
-		for (Equipment e : equipment) {
-			System.out.println(e.toString());
-			idList.add(e.getId()); //this should add just the id of each piece of equipment the player has
+		for (PlayerEquipment e : playerEquipmentList) {
+			idList.add(e.getEquipmentId()); //this should add just the id of each piece of equipment the player has
+		}
+		
+		
+		//to populate the eq itself
+		List<Equipment> equipmentList = jdbcEquipmentRepository.findAll();
+		
+		for (Equipment eq : equipmentList) {
+		System.out.println(eq.toString());
 		}
 
 		int eqChoice = reader.nextInt();
 		
-		
+//		for (Integer i : idList) {
+//			System.out.println("Already have: " + i);
+//		}
 
 		//if the equipment chosen is already in the player's equipment list:
 		if (idList.contains(eqChoice)) {
-			System.out.println("You already have one of these, (" + eqChoice + ") please try again");
+			System.out.println("You already have a " + jdbcEquipmentRepository.get(eqChoice).getName() + ", please try again");
 			
 			buyEquipment();
 		}
 
-		else if (eqChoice <= equipment.size()) {
+		else if (eqChoice <= equipmentList.size()) {
 
 
 			//method to add to player_equipment table (1, eqChoice)
@@ -242,20 +251,18 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 		At the moment I have to hard code the price of the piece of equipment so it takes it away from the total
 		balance*/
 
-			Equipment equipment2 = jdbcEquipmentRepository.get(eqChoice);
+			Equipment equipmentBuy = jdbcEquipmentRepository.get(eqChoice);
 
-			System.out.println("\nYou have picked equipment id: " + eqChoice + equipment2.getName());
-			int priceToDeduct = equipment2.getPrice();
+			System.out.println("\nYou have purchased a " + equipmentBuy.getName());
+			int priceToDeduct = equipmentBuy.getPrice();
 
 
 			player.setBalance(player.getBalance()-priceToDeduct);
-			System.out.println("Balance after deducting " + priceToDeduct + " Kubits is " + player.getBalance() + " Kubits.");
+			System.out.println("\nBalance after deducting " + priceToDeduct + " Kubits is " + player.getBalance() + " Kubits.");
 
 			playerRepository.save(player);			
-			
-
+		
 		}
-
 		
 		else {
 			System.out.println("No equipment with this ID, please try again");
@@ -264,45 +271,69 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 
 	}
 
+	
 
 	public void sellEquipment() {
 
 		System.out.println();
-		System.out.println("1. Sell equipment");
+		System.out.println("2. Sell equipment");
 		System.out.println("Enter id number of the piece of equipment you wish to sell:\n");
 
-		Player player = playerRepository.get(1);
-
-		//List<Equipment> equipment = equipmentRepository.findAll();
-
-		List<Equipment> equipment = player.getEquipmentList();
+		List<Equipment> equipment = jdbcEquipmentRepository.findAll();
 
 		for (Equipment e : equipment) {
 			System.out.println(e.toString());
 		}
-
+		
 		int eqChoice = reader.nextInt();
-		System.out.println("You have picked equipment id: " + eqChoice);
+		
+		//to validate player entry:
+		List<PlayerEquipment> playerEquipmentList = jdbcPlayerEquipmentRepository.findAll();
+
+		ArrayList<Integer> idList = new ArrayList<Integer>();
+		
+		for (PlayerEquipment e : playerEquipmentList) {
+			idList.add(e.getEquipmentId()); //this should add just the id of each piece of equipment the player has
+		}
+
+		if (!idList.contains(eqChoice)) {
+			System.out.println("You don't own " + jdbcEquipmentRepository.get(eqChoice).getName() + ", please try again");
+			
+			sellEquipment();
+		}
+
+		else if (idList.contains(eqChoice)) {
+		
+		
+		Player player = playerRepository.get(1);
+		
 
 
-
+		
 		PlayerEquipment playerEquipment = new PlayerEquipment();
 		playerEquipment.setPlayerId(1);
 		playerEquipment.setEquipmentId(eqChoice);
 
 		jdbcPlayerEquipmentRepository.remove(playerEquipment);
+		
+		Equipment equipmentSell = jdbcEquipmentRepository.get(eqChoice);
 
-		player.setBalance(player.getBalance()+250);
-		System.out.println("balance: " + player.getBalance());
+		System.out.println("You have sold your " + equipmentSell.getName());
+		
+		int priceToReceive = equipmentSell.getPrice()-50;
+		
+		player.setBalance(player.getBalance()+priceToReceive);
+		System.out.println("Balance after sale: " + player.getBalance() + "Kubits.");
 
 		playerRepository.save(player);
 
+		}
 	}
 
 
-	//this method does not work yet
+
 	public void upgradeEquipment() {
-		System.out.println("1. Upgrade equipment");
+		System.out.println("3. Upgrade equipment");
 		System.out.println("Enter id number of the piece of equipment you wish to upgrade:\n");
 
 		List<Equipment> equipmentList = equipmentRepository.findAll();
@@ -312,23 +343,18 @@ public class KylarsVengeanceApplication implements CommandLineRunner {
 		}
 
 		int eqChoice = reader.nextInt();
-		System.out.println("You have picked equipment id: " + eqChoice);
+		Equipment e = jdbcEquipmentRepository.get(eqChoice);
+		System.out.println("You have upgraded your " + e.getName());
 
 		Player player = playerRepository.get(1);
 
-		//		PlayerEquipment playerEquipment = new PlayerEquipment();
-		//		playerEquipment.setPlayerId(1);
-		//		playerEquipment.setEquipmentId(eqChoice);
-
-		//Equipment e = jdbcEquipmentRepository.get(eqChoice);
-
-		Equipment e = player.getEquipmentList().get(eqChoice);
-
+		
 		e.setDamageInflicted(e.getDamageInflicted() + 15);
 		e.setProtectionProvided(e.getProtectionProvided() + 15);
 		e.setUpgradeLevel(e.getUpgradeLevel() + 1);
-
-		jdbcEquipmentRepository.save(e);
+		
+	
+		jdbcEquipmentRepository.update(e);
 		playerRepository.save(player);
 
 

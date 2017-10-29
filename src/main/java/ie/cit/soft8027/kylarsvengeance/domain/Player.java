@@ -123,14 +123,6 @@ public class Player {
 		String out = "Player ID: " + id + "\nFirst Name: " + firstName + "\nLast Name: " + lastName + "\nGender: " + gender
 				+ "\nUsername: " + userName + "\nBalance: " + balance + " Kubits" + "\nCurrent Equipment: \n";
 		
-		//List<Equipment> equipment = equipmentRepository.findAll();
-		
-//		for (Equipment e : equipment) {
-//			System.out.println(e.toString());
-//			out += e.toString() + "\n";
-//		}
-		
-		//equipmentList = equipmentRepository.findAll();
 		
 			for (Equipment e : equipmentList) {
 				out += e.toString() + "\n";

@@ -10,4 +10,4 @@ INSERT INTO equipment (id, type, name, damageInflicted, protectionProvided, upgr
 							(7, 'armour', 'Chain Mail', 0, 30, 1, 300),
 							(8, 'armour', 'Plate Armour', 0, 74, 1, 450);
 
-INSERT INTO players_equipment VALUES (1, 1), (1, 2), (1, 5), (1, 8); 
+INSERT INTO players_equipment VALUES (1, 1), (1, 5), (1, 7); 
